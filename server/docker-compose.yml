@@ -1,0 +1,12 @@
+# Compose 版本 Version 2支持更多的指令。Version 1将来会被弃用。
+version: "3"
+
+# 定义服务
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: pass123
