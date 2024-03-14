@@ -8,6 +8,11 @@ import { User } from './auth/user.entity';
 import { Task } from './tasks/task.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
+import { ProjectsModule } from './projects/projects.module';
+import { TranslationsModule } from './translations/translations.module';
+import { Project } from './projects/project.entity';
+import { Translation } from './translations/translation.entity';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -16,6 +21,7 @@ import { configValidationSchema } from './config.schema';
       validationSchema: configValidationSchema,
     }),
     TasksModule,
+    CommonModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -30,7 +36,7 @@ import { configValidationSchema } from './config.schema';
           type: 'postgres',
           autoLoadEntities: true,
           synchronize: true,
-          entities: [User, Task],
+          entities: [User, Task, Project, Translation],
           host: configService.get('DB_HOST'),
           port: configService.get('DB_PORT'),
           username: configService.get('DB_USERNAME'),
@@ -51,6 +57,8 @@ import { configValidationSchema } from './config.schema';
     //   entities: [User, Task],
     // }),
     AuthModule,
+    ProjectsModule,
+    TranslationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,7 +3,7 @@
  * @Author: liufan
  * @Date: 2024-02-13 11:02:41
  * @LastEditors: liufan
- * @LastEditTime: 2024-02-15 17:42:39
+ * @LastEditTime: 2024-02-26 18:11:03
  */
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -20,12 +20,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   imports: [
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    // JwtModule.register({
-    //   secret: 'topSecret51',
-    //   signOptions: {
-    //     expiresIn: 3600,
-    //   },
-    // }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
