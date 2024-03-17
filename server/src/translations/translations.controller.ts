@@ -138,13 +138,14 @@ export class TranslationsController {
 
   @Get('/merge/page')
   async getMergeTranslationsByProjectIdAndPagation(@Query() query) {
-    const { projectId, pageNo, pageSize, key } = query || {};
+    const { projectId, pageNo, pageSize, key, search } = query || {};
     const project = await this.projectsService.getProjectById(projectId);
     return this.translationsService.getMergeTranslates(
       {
         pageNo,
         pageSize,
         key,
+        search,
       },
       project,
     );

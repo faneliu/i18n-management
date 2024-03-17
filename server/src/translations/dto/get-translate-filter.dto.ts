@@ -21,5 +21,9 @@ export class GetTranslatesFilterDto {
   pageSize?: number;
 
   @IsOptional()
+  @IsString()
+  search?: string;
+
+  @IsOptional()
   id?: string;
 }

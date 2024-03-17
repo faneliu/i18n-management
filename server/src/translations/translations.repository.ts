@@ -107,7 +107,7 @@ export class TranslationsRepository extends Repository<Translation> {
     filterDto: GetTranslatesFilterDto,
     project: Project,
   ): Promise<paginationResponse<Translation[]>> {
-    const { key, pageNo = 1, pageSize = 10 } = filterDto;
+    const { key, pageNo = 1, pageSize = 10, search } = filterDto;
 
     const query = this.createQueryBuilder('translate');
 
@@ -141,6 +141,9 @@ export class TranslationsRepository extends Repository<Translation> {
         )
         .groupBy('translate.key')
         .orderBy('translate.key', 'ASC')
+        // .where('translate.value LIKE :searchTerm', {
+        //   searchTerm: `%${search}%`,
+        // })
         .skip((pageNo - 1) * pageSize)
         .take(pageSize)
         .getRawMany();
